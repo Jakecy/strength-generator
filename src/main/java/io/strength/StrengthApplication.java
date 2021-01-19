@@ -8,10 +8,10 @@ import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 
 //http://velocity.apache.org/engine/1.7/user-guide.html#foreach-loop
 @SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class})
-@MapperScan("io.renren.dao")
-public class RenrenApplication {
+@MapperScan("io.strength.dao")
+public class StrengthApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RenrenApplication.class, args);
+		SpringApplication.run(StrengthApplication.class, args);
 	}
 }
