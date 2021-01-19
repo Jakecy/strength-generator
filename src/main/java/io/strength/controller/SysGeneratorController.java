@@ -28,6 +28,7 @@ import java.util.Map;
  * 
  * @author Mark sunlightcs@gmail.com
  */
+
 @Controller
 @RequestMapping("/sys/generator")
 public class SysGeneratorController {
