@@ -1,0 +1,35 @@
+package ${package}.${moduleName}.service;
+
+
+import com.starsaiot.rubbish.result.page.GenericPage;
+import org.springframework.transaction.annotation.Transactional;
+import ${package}.${moduleName}.entity.${className};
+import java.util.List;
+import java.util.Map;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+public interface ${className}Service  {
+
+
+    @Transactional
+    Boolean save(Object po);
+
+    @Transactional
+    Boolean edit(Object po);
+
+    @Transactional
+    Boolean removeById(Long id);
+
+    Object queryById(Long id);
+
+    GenericPage<Object> queryAll(Integer pageNo, Integer pageSize, Object po);
+
+    List<Object> queryList(Object po);
+}
+

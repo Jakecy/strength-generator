@@ -1,0 +1,28 @@
+package ${package}.${moduleName}.dao;
+
+import ${package}.${moduleName}.entity.${className};
+import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
+
+/**
+ * ${comments}
+ * 
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@Repository
+@Mapper
+public interface ${className}Mapper  {
+
+    int deleteByPrimaryKey(Long id);
+
+    int insert(${className} record);
+
+    ${className} selectByPrimaryKey(Long id);
+
+
+    int updateByPrimaryKeySelective(${className} record);
+
+    List<${className}> selectByCondition(${className} condition);
+}

@@ -1,0 +1,50 @@
+package ${package}.${moduleName}.service.impl;
+
+import org.springframework.stereotype.Service;
+import java.util.Map;
+
+
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
+
+
+
+import org.slf4j.Logger;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+
+import ${package}.${moduleName}.dao.${className}Mapper;
+import ${package}.${moduleName}.entity.${className};
+import ${package}.${moduleName}.service.${className}Service;
+
+
+
+
+@Service
+public class ${className}ServiceImpl implements ${className}Service {
+
+    private static final String CLASS_NAME = ${className}ServiceImpl.class.getName();
+
+    private static final Logger infoLogger = SystemLoggerFactory.getServerInfoLogger(${className}ServiceImpl.class);
+    private static final Logger errorLogger = SystemLoggerFactory.getServerErrorLogger(${className}ServiceImpl.class);
+
+
+
+}

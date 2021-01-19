@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="${package}.${moduleName}.dao.${className}Mapper">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="${package}.${moduleName}.entity.${className}" id="${classname}Map">
+#foreach($column in $columns)
+        <result property="${column.attrname}" column="${column.columnName}"/>
+#end
+    </resultMap>
+
+
+    <sql id="table_name">
+		${tableName}
+	</sql>
+<sql id="Base_Column_List">
+#foreach($column in $columns)
+#if( $foreach.hasNext)
+${column.columnName},
+#end##
+#if(!$foreach.hasNext)
+${column.columnName}
+#end
+#end
+</sql>
+
+    <!--按主键查询-->
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ${tableName}
+        where id = #{id}
+    </select>
+
+    <!--按条件查询-->
+    <select id="selectByCondition" parameterType="${package}.${moduleName}.entity.${className}" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from  ${tableName}
+        <include refid="QUERY_WHERE_CLAUSE"/>
+    </select>
+    <!--新增,主键递增-->
+<insert id="insert" parameterType="${package}.${moduleName}.entity.${className}">
+<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+SELECT LAST_INSERT_ID()
+</selectKey>
+insert into ${tableName}
+(
+#foreach($column in $columns)
+#if( $foreach.hasNext)
+${column.columnName},
+#end
+#if(!$foreach.hasNext)
+${column.columnName}
+#end
+#end
+)
+values
+(
+#foreach($column in $columns)
+#if( $foreach.hasNext)
+${column.attrname},
+#end
+#if(!$foreach.hasNext)
+${column.attrname}
+#end
+#end
+)
+</insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+      delete from ${tableName}
+      where id = #{id}
+    </delete>
+
+
+        <update id="updateByPrimaryKey" parameterType="${package}.${moduleName}.entity.${className}">
+        UPDATE ${tableName}
+        SET ##
+        #set ($i=1) ##
+        #foreach($column in $columns)##
+
+            #if( $foreach.count > 1 && $foreach.hasNext) ##
+                ${column.columnName}=#{${column.attrname}},##
+            #end
+            #if(!$foreach.hasNext)##
+                ${column.columnName}=#{${column.attrname}}
+        #end
+            #set($i=$i+1)
+            #if( $foreach.count == $columns.size())
+        WHERE id = #{id}
+        #end
+        #end
+       </update>
+
+<update id="updateByPrimaryKeySelective" parameterType="${package}.${moduleName}.entity.${className}">
+    UPDATE ${tableName}
+    <set>
+        #foreach($column in $columns)
+
+            #if( $foreach.count > 1 && $foreach.hasNext) ##
+                <if test="${column.attrname} != null "> ${column.columnName}=#{${column.attrname}},</if>
+            #end
+        #end
+
+    </set>
+    WHERE id = #{id}
+</update>
+
+    <!-- 全部条件(更多功能可以通过queryData扩展实现)  -->
+    <sql id="QUERY_WHERE_CLAUSE">
+        <where>
+            #foreach($column in $columns)##
+                <if test="${column.attrname} != null and ${column.attrname} != ''"> <![CDATA[ AND `${column.columnName}` = #{${column.attrname}}]]> </if>
+            #end
+        </where>
+    </sql>
+
+</mapper>

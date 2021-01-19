@@ -1,0 +1,42 @@
+package ${package}.${moduleName}.entity;
+
+
+
+import java.math.BigDecimal;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+import java.io.Serializable;
+import java.util.Date;
+import lombok.Data;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@ApiModel("${comments}")
+@Data
+public class ${className} implements Serializable {
+private static final long serialVersionUID = 1L;
+
+#foreach ($column in $columns)
+
+	#if($column.columnName == $pk.columnName)
+	#end##
+	#if($column.dataType == 'datetime' )
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	#end##
+@ApiModelProperty("$column.comments")
+private $column.attrType $column.attrname;
+
+#end##
+
+}
