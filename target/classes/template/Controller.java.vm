@@ -33,6 +33,7 @@ import ${package}.${moduleName}.service.${className}Service;
  * @email ${email}
  * @date ${datetime}
  */
+@Api(description = "${pathName}")
 @RestController
 @RequestMapping("/${pathName}")
 public class ${className}Controller {

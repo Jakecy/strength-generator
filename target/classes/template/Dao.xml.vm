@@ -4,7 +4,7 @@
 <mapper namespace="${package}.${moduleName}.dao.${className}Mapper">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="${package}.${moduleName}.entity.${className}" id="${classname}Map">
+    <resultMap type="${package}.${moduleName}.entity.${className}" id="BaseResultMap">
 #foreach($column in $columns)
         <result property="${column.attrname}" column="${column.columnName}"/>
 #end
@@ -60,10 +60,10 @@ values
 (
 #foreach($column in $columns)
 #if( $foreach.hasNext)
-${column.attrname},
+#{${column.attrname}},
 #end
 #if(!$foreach.hasNext)
-${column.attrname}
+#{${column.attrname}}
 #end
 #end
 )

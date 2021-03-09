@@ -3,6 +3,7 @@ package ${package}.${moduleName}.dao;
 import ${package}.${moduleName}.entity.${className};
 import org.springframework.stereotype.Repository;
 import org.apache.ibatis.annotations.Mapper;
+import java.util.List;
 
 /**
  * ${comments}
